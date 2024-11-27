@@ -1,5 +1,6 @@
-'use client'
+'use client';
 import { useState, ChangeEvent } from "react";
+import Image from "next/image";
 import DragAndDrop from "./DragAndDrop"; // Import the DragAndDrop component
 
 const CNICPrint = () => {
@@ -93,7 +94,6 @@ const CNICPrint = () => {
       </div>
 
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6">
-        {/* Tips Section */}
         <div className="mb-8 p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded">
           <h2 className="font-bold text-xl text-yellow-700">
             Tips for Uploading and Printing
@@ -106,7 +106,6 @@ const CNICPrint = () => {
           </ul>
         </div>
 
-        {/* Upload Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
           <DragAndDrop
             onDrop={(files) => handleDrop(files, setFrontImages)}
@@ -122,7 +121,6 @@ const CNICPrint = () => {
           />
         </div>
 
-        {/* Number of Copies */}
         <div className="flex items-center gap-4 mb-6">
           <label
             htmlFor="num-copies"
@@ -140,7 +138,6 @@ const CNICPrint = () => {
           />
         </div>
 
-        {/* Print Button */}
         <div className="text-right mb-8">
           <button
             onClick={handlePrint}
@@ -150,11 +147,9 @@ const CNICPrint = () => {
           </button>
         </div>
 
-        {/* Preview Section */}
         <div>
           <h2 className="text-2xl font-bold text-blue-700 mb-4">Preview</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {/* Front Images */}
             <div>
               <h3 className="text-lg font-semibold text-gray-700 mb-3">
                 Front Sides
@@ -165,10 +160,13 @@ const CNICPrint = () => {
                     key={index}
                     className="relative border border-gray-300 rounded-lg overflow-hidden shadow-md"
                   >
-                    <img
+                    <Image
                       src={img}
                       alt={`Front ${index}`}
-                      className="w-full h-auto object-cover"
+                      className="object-cover"
+                      width={200}
+                      height={150}
+                      unoptimized
                     />
                     <button
                       onClick={() => handleRemoveImage(index, setFrontImages)}
@@ -181,7 +179,6 @@ const CNICPrint = () => {
               </div>
             </div>
 
-            {/* Back Images */}
             <div>
               <h3 className="text-lg font-semibold text-gray-700 mb-3">
                 Back Sides
@@ -192,10 +189,13 @@ const CNICPrint = () => {
                     key={index}
                     className="relative border border-gray-300 rounded-lg overflow-hidden shadow-md"
                   >
-                    <img
+                    <Image
                       src={img}
                       alt={`Back ${index}`}
-                      className="w-full h-auto object-cover"
+                      className="object-cover"
+                      width={200}
+                      height={150}
+                      unoptimized
                     />
                     <button
                       onClick={() => handleRemoveImage(index, setBackImages)}
@@ -210,7 +210,6 @@ const CNICPrint = () => {
           </div>
         </div>
 
-        {/* Hidden Printable Area */}
         <div id="printable" className="hidden print:block mt-8">
           {frontPages.map((page, pageIndex) => (
             <div
@@ -223,10 +222,13 @@ const CNICPrint = () => {
                   className="w-[98mm] h-[72mm] flex justify-center items-center"
                 >
                   {img && (
-                    <img
+                    <Image
                       src={img}
                       alt="Front Side"
                       className="w-full h-full object-contain"
+                      width={200}
+                      height={150}
+                      unoptimized
                     />
                   )}
                 </div>
@@ -244,10 +246,13 @@ const CNICPrint = () => {
                   className="w-[98mm] h-[72mm] flex justify-center items-center"
                 >
                   {img && (
-                    <img
+                    <Image
                       src={img}
                       alt="Back Side"
                       className="w-full h-full object-contain"
+                      width={200}
+                      height={150}
+                      unoptimized
                     />
                   )}
                 </div>
@@ -257,7 +262,6 @@ const CNICPrint = () => {
         </div>
       </div>
 
-      {/* Copyright Section */}
       <footer className="text-center mt-10 text-gray-600">
         <p>
           © {new Date().getFullYear()} CNIC Printing Tool. All rights reserved.
